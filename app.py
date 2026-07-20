@@ -1,8 +1,17 @@
 import streamlit as st
+def reset_all():
+    st.session_state.user_name = ""
+    st.session_state.weather = "맑음"
+    st.session_state.top_type = "후드티"
+    st.session_state.top_color = "밝음"
+    st.session_state.bottom_type = "청바지"
+    st.session_state.bottom_color = "슬림"
+    st.session_state.shoes = "스니커즈"
+    st.session_state.acc = []
 
 with st.sidebar:
     st.header("프로필")
-    user_name = st.text_input("닉네임")
+    user_name = st.text_input("닉네임","key=user_name")
     weather = st.selectbox("오늘 날씨", ["맑음", "흐림", "비/눈", "매우 추움"])
     st.markdown("---")
     st.info(f"반가워요, {user_name}님! 오늘 날씨는 '{weather}'이네요.")
@@ -46,3 +55,4 @@ if st.button("코디 완성하기"):
         with st.expander("코디 연출 팁 영상 보기"):
              st.video("https://www.youtube.com/watch?v=1kMZBytly1k")
              st.write("전문가가 제안하는 코디 연출법을 참고해 보세요.")
+st.button("전체 초기화", on_click=reset_all)
