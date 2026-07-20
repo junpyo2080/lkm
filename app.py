@@ -1,13 +1,14 @@
 import streamlit as st
 
 st.markdown("# AI챗봇 만들기")
-st.markdown(---")
+st.markdown("---")
 st.markdown("## 질문을 하시면 AI친구가 응답합니다.")
 st.markdown("* **제작언어**:'Python'")
 st.markdown("* **프레임워크**:'streamlit'")
 st.markdown("### '최근대화'")
 st.markdown("~~질문을 자유롭게 입력하세요.~~")
- st.markdown("# AI 챗봇 만들기")
+ 
+st.markdown("# AI 챗봇 만들기")
 st.markdown("---")
 st.markdown("## 질문을 하시면 AI 친구가 응답합니다.")
 st.header("1. 기본 정보 입력")
