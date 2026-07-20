@@ -9,8 +9,8 @@ if 'count' not in st.session_state:
 if st.button("증가"):
     st.session_state.count += 1
 
-# 누른 횟수만큼 "임경미 " 글자를 반복해서 생성합니다.
-display_text = " 임경미" * st.session_state.count
+# 누른 횟수만큼 "조여정 전학가 " 글자를 반복해서 생성합니다.
+display_text = " 조여정 전학가" * st.session_state.count
 
 # 결과 출력
 st.markdown(f"## 현재 숫자: `{st.session_state.count}`")
