@@ -113,5 +113,3 @@ pg = st.navigation([
 
 st.title("🌱 갓생 살기 플래너")
 pg.run()
-
-         
