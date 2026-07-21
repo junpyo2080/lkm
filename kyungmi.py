@@ -9,7 +9,9 @@ if 'ee_topics' not in st.session_state:
     st.session_state.ee_topics = [
         ["옴의 법칙(Ohm's Law) 이해 및 회로 해석", False],
         ["키르히호프 법칙(KCL/KVL) 실습", False],
-        ["반도체 P-N 접합 원리 학습", False]
+        ["반도체 P-N 접합 원리 학습", False],
+        ["반도체를 위한 선택과목 선택",False],
+        ["전기전자공학에 대한 기초 상식 이해",False]
     ]
 if 'learning_goal' not in st.session_state:
     st.session_state.learning_goal = "전기전자공학 핵심 개념 마스터!"
