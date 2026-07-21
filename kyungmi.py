@@ -1,87 +1,87 @@
 import streamlit as st
 
 # 1. 세션 상태 초기화
-if 'suspect_list' not in st.session_state:
-    st.session_state.suspect_list = []
-if 'fifa_motto' not in st.session_state:
-    st.session_state.fifa_motto = "왜 피파를 껐나 누가 그랬냐!"
-if 'fifa_updated' not in st.session_state:
-    st.session_state.fifa_updated = False
+if 'transfer_list' not in st.session_state:
+    st.session_state.transfer_list = []
+if 'transfer_reason' not in st.session_state:
+    st.session_state.transfer_reason = "원활한 학교 적응 지원"
+if 'reason_updated' not in st.session_state:
+    st.session_state.reason_updated = False
 
-# 2. 용의자 추가 콜백 함수
-def add_suspect():
-    person = st.session_state.person_input
-    if person:
-        st.session_state.suspect_list.append([person, False])
-        st.toast("용의자가 목록에 추가되었습니다!")
-        st.session_state.person_input = ""
+# 2. 전학 대상 추가 콜백 함수
+def add_student():
+    student = st.session_state.student_input
+    if student:
+        st.session_state.transfer_list.append([student, False])
+        st.toast("전학 대상 학생이 등록되었습니다!")
+        st.session_state.student_input = ""
 
-# 3. 질문 수정 모달 다이얼로그
-@st.dialog("상황 및 질문 수정")
-def edit_fifa():
-    motto = st.text_input("질문/상황을 입력하세요", value="왜 피파를 껐나 누가 그랬냐!")
-    if st.button("저장"):
-        st.session_state.fifa_motto = motto
-        st.session_state.fifa_updated = True
+# 3. 전학 사유 수정 모달 다이얼로그
+@st.dialog("전학 사유/기준 수정")
+def edit_reason():
+    reason = st.text_input("전학 추진 사유나 기준을 적어주세요.")
+    if st.button("사유 저장"):
+        st.session_state.transfer_reason = reason
+        st.session_state.reason_updated = True
         st.rerun()
 
 # 4. 페이지 함수 정의
-def page_motto():
-    st.header("📣 1. 문제 발생 상황")
-    st.info(f"현재 상황: {st.session_state.fifa_motto}")
-    if st.button("상황 질문 수정하기"):
-        edit_fifa()
-    if st.session_state.fifa_updated:
-        st.success("상황 질문이 수정되었습니다!")
-        st.session_state.fifa_updated = False
+def page_reason():
+    st.header("📣 1. 전학 사유 및 기준 설정")
+    st.info(f"현재 전학 기준: {st.session_state.transfer_reason}")
+    if st.button("사유 수정하기"):
+        edit_reason()
+    if st.session_state.reason_updated:
+        st.success("새로운 전학 사유가 등록되었습니다!")
+        st.session_state.reason_updated = False
     st.markdown("---")
 
-def page_suspects():
-    st.header("✅ 2. 누가 그랬냐?")
-    st.write(f"현재 핵심 질문: **{st.session_state.fifa_motto}**")
-    st.text_input("피파 끈 사람(용의자) 입력", key="person_input")
-    st.button("추가하기", on_click=add_suspect)
+def page_students():
+    st.header("✅ 2. 누굴 전학 보낼까?")
+    st.write(f"현재 전학 기준: **{st.session_state.transfer_reason}**")
+    st.text_input("추가할 학생 이름을 입력하세요", key="student_input")
+    st.button("추가하기", on_click=add_student)
     
     st.markdown("---")
-    for i in range(len(st.session_state.suspect_list)):
-        col_name, col_btn, col_status = st.columns([4, 1, 1])
-        with col_name:
-            st.write(f"{i+1}. {st.session_state.suspect_list[i][0]}")
+    for i in range(len(st.session_state.transfer_list)):
+        col_student, col_btn, col_status = st.columns([4, 1, 1])
+        with col_student:
+            st.write(f"{i+1}. {st.session_state.transfer_list[i][0]}")
         with col_btn:
-            if st.button("자백/확인", key=f"btn_{i}"):
-                st.session_state.suspect_list[i][1] = True
+            if st.button("완료", key=f"btn_{i}"):
+                st.session_state.transfer_list[i][1] = True
                 st.rerun()
         with col_status:
-            if st.session_state.suspect_list[i][1]:
-                st.write("✅ **범인 확인!**")
+            if st.session_state.transfer_list[i][1]:
+                st.write("✅ **전학 완료!**")
     st.markdown("---")
 
 def page_report():
-    st.header("📈 3. 수사 진행 현황")
-    if not st.session_state.suspect_list:
-        st.write("아직 등록된 용의자가 없습니다.")
+    st.header("📈 3. 어떻게 진행되고 있을까?")
+    if not st.session_state.transfer_list:
+        st.write("아직 등록된 전학 대상 학생이 없습니다.")
     else:
-        total = len(st.session_state.suspect_list)
-        count = sum(1 for item in st.session_state.suspect_list if item[1])
+        total = len(st.session_state.transfer_list)
+        count = sum(1 for item in st.session_state.transfer_list if item[1])
         
         progress = (count / total) * 100
-        st.metric("자백/확인 진행률", f"{progress:.1f}%")
+        st.metric("전학 처리 진행률", f"{progress:.1f}%")
         st.progress(progress / 100)
         
         if progress == 100:
             st.balloons()
-            st.success("모든 범인이 밝혀졌습니다! 🎮⚽")
+            st.success("모든 학생의 전학 절차가 완료되었습니다! 🏆")
             
-        if st.button("목록 전체 초기화"):
-            st.session_state.suspect_list = []
+        if st.button("기록 전체 초기화"):
+            st.session_state.transfer_list = []
             st.rerun()
 
 # 5. 네비게이션 설정 및 실행
 pg = st.navigation([
-    st.Page(page_motto, title="왜 피파를 껐나", icon="📣"),
-    st.Page(page_suspects, title="누가 그랬냐?", icon="✅"),
-    st.Page(page_report, title="수사 현황", icon="📈")
+    st.Page(page_reason, title="전학 사유", icon="📣"),
+    st.Page(page_students, title="누굴 전학 보낼까?", icon="✅"),
+    st.Page(page_report, title="어떻게 진행될까?", icon="📈")
 ], position="top")
 
-st.title("🎮 왜 피파를 껐나 누가 그랬냐 관리기")
+st.title("🏫 전학 수속 및 명단 관리 시스템")
 pg.run()
