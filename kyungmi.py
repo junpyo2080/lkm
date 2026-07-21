@@ -4,7 +4,8 @@ if 'todo_list' not in st.session_state:
     st.session_state.todo_list = [
         ["옴의 법칙(V=IR) 정리하기", False],
         ["키르히호프 법칙 문제 풀기", False],
-        ["P형/N형 반도체 차이점 공부하기", False]
+        ["P형/N형 반도체 차이점 공부하기", False],
+        [전기전자공학에 관한 선택과목과 대학 찾아보기",False]
     ]
 if 'user_motto' not in st.session_state:
     st.session_state.user_motto = "오늘도 전기전자 마스터!"
