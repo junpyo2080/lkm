@@ -66,3 +66,12 @@ pg = st.navigation([
 
 st.title("🌱 갓생 살기 플래너")
 pg.run()
+progress = (count / total) * 100
+st.metric("오늘의 달성률", f"{progress:.1f}%")
+st.progress(progress / 100)
+if progress == 100:
+    st.balloons()
+    st.success("모든 목표를 달성하셨습니다! 🏆")
+if st.button("기록 전체 초기화"):
+    st.session_state.todo_list = []
+    st.rerun()
