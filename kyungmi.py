@@ -5,7 +5,7 @@ if 'todo_list' not in st.session_state:
         ["옴의 법칙(V=IR) 정리하기", False],
         ["키르히호프 법칙 문제 풀기", False],
         ["P형/N형 반도체 차이점 공부하기", False],
-        ["반도체 관련 선택과목 및 대학 공부하기",False]
+        ["반도체 관련 선택과목 및 대학 알아보기",False]
     ]
 if 'user_motto' not in st.session_state:
     st.session_state.user_motto = "오늘도 전기전자 마스터!"
@@ -73,35 +73,33 @@ def page_report():
         progress = (count / total) * 100
         st.metric("오늘의 학습 달성률", f"{progress:.1f}%")
         st.progress(progress / 100)
+        
         if progress == 100:
+            st.snow()
             st.toast("🎉 축하합니다! 모든 목표를 달성했습니다!", icon="🏆")
             st.success("오늘의 모든 공학 목표를 달성했습니다! 🏆")
+            
         if st.button("기록 전체 초기화"):
             st.session_state.todo_list = []
             st.rerun()
 
 def page_quiz():
     st.header("🧐 전기전자 기초 퀴즈")
+    
     q1 = st.radio("1. 전압($V$)이 10V이고 저항($R$)이 5$\Omega$일 때, 전류($I$)는 얼마일까요?", ["1A", "2A", "50A"])
     if st.button("1번 정답 확인"):
         if q1 == "2A":
+            st.snow()
+            st.toast("정답입니다! 👏")
             st.success("정답입니다! ($I = V / R = 10 / 5 = 2A$)")
         else:
             st.error("다시 생각해보세요!")
+            
     st.markdown("---")
+    
     q2 = st.radio("2. P형 반도체와 N형 반도체를 접합하여 한쪽 방향으로만 전류가 흐르게 하는 부품은?", ["저항", "다이오드", "트랜지스터"])
     if st.button("2번 정답 확인"):
         if q2 == "다이오드":
-            st.success("정답입니다!")
-        else:
-            st.error("다시 생각해보세요!")
-
-pg = st.navigation([
-    st.Page(page_motto, title="오늘의 목표", icon="📣"),
-    st.Page(page_todo, title="학습 체크리스트", icon="✅"),
-    st.Page(page_report, title="학습 달성률", icon="📈"),
-    st.Page(page_quiz, title="기초 퀴즈", icon="🧐")
-], position="top")
-
-st.title("⚡ 고교 전기전자 기초 플래너")
-pg.run()
+            st.snow()
+            st.toast("정답입니다! 👏")
+            st.success("정답입니다!
