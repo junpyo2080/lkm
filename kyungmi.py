@@ -1,12 +1,10 @@
 import streamlit as st
 
-# 1. 세션 상태 초기화
 if 'todo_list' not in st.session_state:
     st.session_state.todo_list = []
 if 'user_motto' not in st.session_state:
     st.session_state.user_motto = "오늘도 화이팅!"
 
-# 2. 할 일 추가 콜백 함수
 def add_todo():
     task = st.session_state.todo_input
     if task:
@@ -14,7 +12,6 @@ def add_todo():
         st.toast("할 일이 추가되었습니다!")
         st.session_state.todo_input = ""
 
-# 3. 페이지 함수 정의
 def page_motto():
     st.header("📣 1. 오늘의 다짐")
     motto = st.text_input("나의 한 줄 좌우명을 적어주세요")
@@ -64,13 +61,11 @@ def page_report():
             st.session_state.todo_list = []
             st.rerun()
 
-# 4. 네비게이션 설정
 pg = st.navigation([
     st.Page(page_motto, title="오늘의 다짐", icon="📣"),
     st.Page(page_todo, title="오늘의 할 일", icon="✅"),
     st.Page(page_report, title="나의 갓생 지수", icon="📈")
 ], position="top")
 
-# 5. 공통 상단 타이틀 및 실행
 st.title("🌱 갓생 살기 플래너")
 pg.run()
