@@ -102,4 +102,49 @@ def page_quiz():
         if q2 == "다이오드":
             st.snow()
             st.toast("정답입니다! 👏")
-            st.success("정답입니다!
+            st.success("정답입니다! 다이오드는 한쪽 방향으로만 전류를 흐르게 합니다.")
+        else:
+            st.error("다시 생각해보세요!")
+
+    st.markdown("---")
+
+    q3 = st.radio("3. 전류의 단위를 나타내는 기호는 무엇일까요?", ["V (볼트)", "A (암페어)", "$\Omega$ (옴)"])
+    if st.button("3번 정답 확인"):
+        if q3 == "A (암페어)":
+            st.snow()
+            st.toast("정답입니다! 👏")
+            st.success("정답입니다! 전류의 단위는 A(암페어)입니다.")
+        else:
+            st.error("다시 생각해보세요!")
+
+    st.markdown("---")
+
+    q4 = st.radio("4. 키르히호프 전류 법칙(KCL)에 따라, 회로의 한 마디로 들어오는 전류의 합과 나가는 전류의 합은?", ["같다", "들어오는 전류가 더 크다", "나가는 전류가 더 크다"])
+    if st.button("4번 정답 확인"):
+        if q4 == "같다":
+            st.snow()
+            st.toast("정답입니다! 👏")
+            st.success("정답입니다! 들어오는 전류의 합과 나가는 전류의 합은 항상 같습니다.")
+        else:
+            st.error("다시 생각해보세요!")
+
+    st.markdown("---")
+
+    q5 = st.radio("5. 저항을 직렬로 연결하면 전체 저항의 크기는 어떻게 될까요?", ["작아진다", "커진다", "변하지 않는다"])
+    if st.button("5번 정답 확인"):
+        if q5 == "커진다":
+            st.snow()
+            st.toast("정답입니다! 👏")
+            st.success("정답입니다! 직렬연결 시 전체 저항은 각 저항의 합과 같으므로 커집니다.")
+        else:
+            st.error("다시 생각해보세요!")
+
+pg = st.navigation([
+    st.Page(page_motto, title="오늘의 목표", icon="📣"),
+    st.Page(page_todo, title="학습 체크리스트", icon="✅"),
+    st.Page(page_report, title="학습 달성률", icon="📈"),
+    st.Page(page_quiz, title="기초 퀴즈", icon="🧐")
+], position="top")
+
+st.title("⚡ 고교 전기전자 기초 플래너")
+pg.run()
