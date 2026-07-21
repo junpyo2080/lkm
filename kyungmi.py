@@ -74,7 +74,7 @@ def page_report():
         st.metric("오늘의 학습 달성률", f"{progress:.1f}%")
         st.progress(progress / 100)
         if progress == 100:
-            st.dancing monkeys()
+            st.rainbows()
             st.success("오늘의 모든 공학 목표를 달성했습니다! 🏆")
         if st.button("기록 전체 초기화"):
             st.session_state.todo_list = []
